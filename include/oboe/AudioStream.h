@@ -485,7 +485,7 @@ public:
     }
 
 
-    int32_t getDelayBeforeCloseMillis() const {
+    uint32_t getDelayBeforeCloseMillis() const {
         return mDelayBeforeCloseMillis;
     }
 
@@ -503,7 +503,7 @@ public:
      *
      * @param delayBeforeCloseMillis time to sleep before close.
      */
-    void setDelayBeforeCloseMillis(int32_t delayBeforeCloseMillis) {
+    void setDelayBeforeCloseMillis(uint32_t delayBeforeCloseMillis) {
         mDelayBeforeCloseMillis = delayBeforeCloseMillis;
     }
 
@@ -615,9 +615,7 @@ protected:
      * Try to avoid a race condition when closing.
      */
     void sleepBeforeClose() {
-        if (mDelayBeforeCloseMillis > 0) {
-            usleep(mDelayBeforeCloseMillis * 1000);
-        }
+        usleep(mDelayBeforeCloseMillis * 1000);
     }
 
     /**
@@ -682,7 +680,7 @@ protected:
     // Time to sleep in order to prevent a race condition with a callback after a close().
     // Two milliseconds may be enough but 10 msec is even safer.
     static constexpr int kMinDelayBeforeCloseMillis = 10;
-    int32_t              mDelayBeforeCloseMillis = kMinDelayBeforeCloseMillis;
+    uint32_t              mDelayBeforeCloseMillis = kMinDelayBeforeCloseMillis;
 
 private:
 
